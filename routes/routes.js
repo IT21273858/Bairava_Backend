@@ -19,12 +19,6 @@ router.patch('/products/update/:id', productController.updateProduct);
 router.delete('/products/delete/:id', productController.deleteProduct);
 
 
-module.exports = router;
-
-// Upload route
-var uploadRoute = require('./uploadRoute')
-router.use('/upload', uploadRoute);
-
 
 module.exports = router;
 
