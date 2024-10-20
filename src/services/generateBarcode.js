@@ -3,12 +3,12 @@ const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/stora
 const { initializeApp } = require('firebase/app'); // Firebase
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBWhSpkKCaU8pOPU0jnGk3ipYHrN-dzVA8",
-    authDomain: "kirusika-35b0d.firebaseapp.com",
-    projectId: "kirusika-35b0d",
-    storageBucket: "kirusika-35b0d.appspot.com",
-    messagingSenderId: "532318485290",
-    appId: "1:532318485290:web:c6b2c1a84f2b5ebd3dbc53"
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId
 };
 
 // Initialize Firebase
