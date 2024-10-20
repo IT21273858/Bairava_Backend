@@ -1,4 +1,5 @@
 const productModel = require('../models/productModel');
+const { generateAndUploadBarcode } = require('./generateBarcode');
 
 const getAllProducts = async () => {
     console.log("Request income to fetch all the products....");
@@ -19,42 +20,48 @@ const getProductById = async (id) => {
     });
 };
 
+
 const createProduct = async (productDetails) => {
     console.log("Request incoming to create a product....");
 
     try {
-        // Step 1: Get all existing SKUs from the database
-        const products = await productModel.findMany({
-            select: { SKU_id: true },  // Only fetch the SKU field
-            orderBy: { SKU_id: 'desc' }  // Sort in descending order to get the highest SKU
+        // Fetch the latest product to find the last SKU_id
+        const latestProduct = await productModel.findFirst({
+            orderBy: {
+                SKU_id: 'desc', // Fetch the latest SKU by ordering it in descending order
+            },
         });
 
-        // Step 2: Calculate the new SKU
+        // Increment the SKU_id based on the last one
         let newSKU;
-        if (products.length > 0) {
-            const highestSKU = parseInt(products[0].SKU_id);  // Get the highest SKU
-            newSKU = highestSKU + 1;  // Increment by 1
+        if (latestProduct) {
+            // Assuming SKU_id is numeric, otherwise modify the logic for alphanumeric SKUs
+            newSKU = (parseInt(latestProduct.SKU_id) + 1).toString();
         } else {
-            newSKU = 1;  // Start with 1 if no products exist
+            // Start SKU from a default value if there are no products
+            newSKU = '1001';
         }
 
-        // Step 3: Create the product with the new SKU
+        // Generate and upload barcode image
+        const barcodeUrl = await generateAndUploadBarcode(newSKU);
+
         const product = {
-            SKU_id: newSKU.toString(),  // Store SKU as a string
+            SKU_id: newSKU, // Assign the newly generated SKU
             name: productDetails.name,
             description: productDetails.description,
             price: productDetails.price,
             expiary_date: new Date(productDetails.expiary_date).toISOString(),
             manufacture_date: new Date(productDetails.manufacture_date).toISOString(),
             net_weight: productDetails.net_weight,
+            barcode_image: barcodeUrl, // Store the barcode image URL
         };
 
         const response = await productModel.create({ data: product });
-        console.log("Product created successfully..", response);
+        console.log("Product created successfully:", response);
         return response;
 
     } catch (error) {
-        console.error("Error while creating product:", error);
+        console.log("Error creating product:", error);
         throw error;
     }
 };

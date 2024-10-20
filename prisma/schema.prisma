@@ -16,6 +16,7 @@ model Product {
   expiary_date     DateTime
   manufacture_date DateTime
   net_weight       String
+  barcode_image    String?   // URL to store the barcode image
   createdAt        DateTime? @default(now())
   updatedAt        DateTime? @updatedAt
 }
