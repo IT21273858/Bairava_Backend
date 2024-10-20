@@ -10,19 +10,21 @@
 
 // module.exports = { bucket };
 
-const { Storage } = require('@google-cloud/storage');
-const path = require('path');
-const pat = require('./testingcloudbuild-426219-15252bd1e52f.json')
+// Uncomment
 
-// Load the Google Cloud Storage credentials
-const serviceKey = path.join(__dirname, './testingcloudbuild-426219-15252bd1e52f.json');
+// const { Storage } = require('@google-cloud/storage');
+// const path = require('path');
+// const pat = require('./testingcloudbuild-426219-15252bd1e52f.json')
 
-const storage = new Storage({
-    keyFilename: serviceKey,
-    projectId: 'testingcloudbuild-426219',
-});
+// // Load the Google Cloud Storage credentials
+// const serviceKey = path.join(__dirname, './testingcloudbuild-426219-15252bd1e52f.json');
 
-const bucketName = 'destinations.vibeslanka.com'; // Replace with your Google Cloud Storage bucket name
-const bucket = storage.bucket(bucketName);
+// const storage = new Storage({
+//     keyFilename: serviceKey,
+//     projectId: 'testingcloudbuild-426219',
+// });
 
-module.exports = { bucket };
+// const bucketName = 'destinations.vibeslanka.com'; // Replace with your Google Cloud Storage bucket name
+// const bucket = storage.bucket(bucketName);
+
+// module.exports = { bucket };
