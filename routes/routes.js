@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('../src/controllers/userController');
 const productController = require('../src/controllers/productController')
+const employeeController = require('../src/controllers/employeeController')
 const router = express.Router();
 
 // User Routes
@@ -18,7 +19,15 @@ router.post('/products/create', productController.createProduct);
 router.patch('/products/update/:id', productController.updateProduct);
 router.delete('/products/delete/:id', productController.deleteProduct);
 
-
+// Employee Routes
+router.get('/employees/getAll', employeeController.getAllEmployees);
+router.get('/employees/get/:id', employeeController.getEmployeeById);
+router.post('/employees/create', employeeController.createEmployee);
+router.patch('/employees/update/:id', employeeController.updateEmployee);
+router.delete('/employees/delete/:id', employeeController.deleteEmployee);
+router.post('/employees/login', employeeController.login);
+router.post('/employees/forgot', employeeController.forgotEmployee);
+router.post('/employees/verifyotp', employeeController.verifyotp);
 
 module.exports = router;
 

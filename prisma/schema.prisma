@@ -11,12 +11,28 @@ model Product {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
   SKU_id           String
   name             String
-  description      String
+  description      String?
+  flavour          String?
   price            String    @unique
   expiary_date     DateTime
   manufacture_date DateTime
   net_weight       String
-  barcode_image    String?   // URL to store the barcode image
+  barcode_image    String? // URL to store the barcode image
   createdAt        DateTime? @default(now())
   updatedAt        DateTime? @updatedAt
+}
+
+model Employee {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  name         String?
+  email        String    @unique
+  password     String?
+  address      String
+  phoneNumber  String?
+  profile_img  String?
+  v_Status     Boolean   @default(true)
+  forgot_code  String?
+  code_expiary DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }
