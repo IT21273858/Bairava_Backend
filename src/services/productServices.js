@@ -32,14 +32,14 @@ const createProduct = async (productDetails) => {
             },
         });
 
-        // Increment the SKU_id based on the last one
+        // Increment the SKU_id based on the last one and pad it to 8 digits
         let newSKU;
         if (latestProduct) {
             // Assuming SKU_id is numeric, otherwise modify the logic for alphanumeric SKUs
-            newSKU = (parseInt(latestProduct.SKU_id) + 1).toString();
+            newSKU = (parseInt(latestProduct.SKU_id) + 1).toString().padStart(8, '0');
         } else {
-            // Start SKU from a default value if there are no products
-            newSKU = '1001';
+            // Start SKU from a default 8-digit value if there are no products
+            newSKU = '00000001';
         }
 
         // Generate and upload barcode image
@@ -65,6 +65,7 @@ const createProduct = async (productDetails) => {
         throw error;
     }
 };
+
 
 const updateProduct = async (id, productDetails) => {
     console.log("Income to update product.....");

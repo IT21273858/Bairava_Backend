@@ -1,5 +1,5 @@
 const bwipjs = require('bwip-js');
-const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/storage'); // Firebase
+const { getStorage, ref, uploadBytes, getDownloadURL } = require('@firebase/storage'); // Firebase
 const { initializeApp } = require('firebase/app'); // Firebase
 
 const firebaseConfig = {
@@ -24,6 +24,7 @@ const generateAndUploadBarcode = async (SKU_id) => {
             text: SKU_id,          // Text to encode (SKU_id in this case)
             scale: 3,              // 3x scaling factor
             height: 10,            // Barcode height, in millimeters
+            width:40,
             includetext: true,     // Show human-readable text
             textxalign: 'center',  // Align the text in the center
         });
