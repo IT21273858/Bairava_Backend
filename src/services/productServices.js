@@ -50,6 +50,7 @@ const createProduct = async (productDetails) => {
             name: productDetails.name,
             description: productDetails.description,
             price: productDetails.price,
+            flavour:productDetails.flavour,
             expiary_date: new Date(productDetails.expiary_date).toISOString(),
             manufacture_date: new Date(productDetails.manufacture_date).toISOString(),
             net_weight: productDetails.net_weight,
