@@ -1,6 +1,5 @@
 const productModel = require('../models/productModel');
-const { generateAndUploadBarcode } = require('./generateBarcode');
-
+const {generateBarcodeBase64} = require("../services/generateBarcode")
 const getAllProducts = async () => {
     console.log("Request income to fetch all the products....");
     try {
@@ -43,7 +42,9 @@ const createProduct = async (productDetails) => {
         }
 
         // Generate and upload barcode image
-        const barcodeUrl = await generateAndUploadBarcode(newSKU);
+        const barcodeUrl = await generateBarcodeBase64(newSKU);
+        console.log(barcodeUrl);
+        
 
         const product = {
             SKU_id: newSKU, // Assign the newly generated SKU
